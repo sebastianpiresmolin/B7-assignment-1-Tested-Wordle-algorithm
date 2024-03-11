@@ -6,42 +6,62 @@ the code was already written and in some ways already dependant on other pieces 
 more difficult and I found myself "adjusting" my tests to fit the already written function, when in reality
 the function should be dictated by the test cases. */
 
-//I started by writing a test that checks if the function returns the correct output when the user input is correct.
-//I did this because it is the most basic test case and it will help me understand how the function should work.
-test('Show message "Correct!" if the user input is correct', () => {
-  const userInput = 'Testing';
-  const correctAnswer = 'Testing';
-  const expectedOutput = 'Correct!';
 
-  //I then wrote the expected output and the input for the function. And gave it my mocked userInput and correctAnswer.
+/* Ensures that the wordle function is properly implemented. 
+Without this, all other tests would be meaningless. */
 
-  const result = algorithmA(userInput, correctAnswer);
-
-  //I then called the function with the input and stored the result in a variable called result.
-  expect(result).toBe(expectedOutput);
+test('algorithmA function is defined and is a function', () => {
+  expect(typeof algorithmA).toEqual('function');
 });
 
-/*I then wrote a test that checks if the function returns the correct output when
-the user input is completely incorrect.*/
-test('Show message "0 out of 7 characters are correct." if the user inputs "Johnny"', () => {
-  const userInput = 'Johnny';
-  const correctAnswer = 'Testing';
-  const expectedOutput = '0 out of 7 characters are correct.';
 
-  const result = algorithmA(userInput, correctAnswer);
-
-  expect(result).toBe(expectedOutput);
+// testing to see if the function returns the correct result when the user input is completely correct
+test('Correct letters are marked as correct', () => {
+  const result = algorithmA('TEST', 'TEST');
+  expect(result).toEqual([
+    { letter: 'T', result: 'correct' },
+    { letter: 'E', result: 'correct' },
+    { letter: 'S', result: 'correct' },
+    { letter: 'T', result: 'correct' },
+  ]);
 });
 
-/* I then wrote a test that checks if the function returns the correct output when the user input is partially correct.
-I did this because it is the most common test case and it will help me understand how the function should work and
-it is the most likely scenario for the user to input the wrong answer due to capitalization.*/
-test('Show message "6 out of 7 characters are correct." if the user inputs "nEsTiNg"', () => {
-  const userInput = 'nEsTiNg';
-  const correctAnswer = 'Testing';
-  const expectedOutput = '6 out of 7 characters are correct.';
+// testing to see if the function returns the correct result when the user input is completely incorrect
+test('Incorrect letters are marked as incorrect', () => {
+  const result = algorithmA('TEST', 'AAAA');
+  expect(result).toEqual([
+    { letter: 'T', result: 'incorrect' },
+    { letter: 'E', result: 'incorrect' },
+    { letter: 'S', result: 'incorrect' },
+    { letter: 'T', result: 'incorrect' },
+  ]);
+});
 
-  const result = algorithmA(userInput, correctAnswer);
+// testing to see if the function returns the correct result when the user input is somewhat correct
+test('Misplaced letters are marked as misplaced', () => {
+  const result = algorithmA('TEST', 'ETST');
+  expect(result).toEqual([
+    { letter: 'T', result: 'misplaced' },
+    { letter: 'E', result: 'misplaced' },
+    { letter: 'S', result: 'correct' },
+    { letter: 'T', result: 'correct' },
+  ]);
+});
 
-  expect(result).toBe(expectedOutput);
+//testing to see if the function returns the correct result when the user input is somewhat correct and also has
+//multiple instances of the same letter.
+test('Testing what happens if the same letter is found more instances than what the answer is', () => {
+    const result = algorithmA('TTTT', 'TEST');
+    expect(result).toEqual([
+      { letter: 'T', result: 'correct' },
+      { letter: 'T', result: 'incorrect' },
+      { letter: 'T', result: 'incorrect' },
+      { letter: 'T', result: 'correct' },
+    ]);
+  });
+
+
+test('Empty strings return an empty array', () => {
+  const result = algorithmA('', '');
+  expect(result).toEqual([]);
 });

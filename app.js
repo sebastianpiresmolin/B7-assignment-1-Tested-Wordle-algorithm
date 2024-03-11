@@ -1,29 +1,36 @@
 /*Algorithm A
 This algorithm compares the user's input to the correct answer
-and returns the number of correct characters or "Correct!" if the user's input is correct.*/
+and returns the number of correct characters or incorrect or misplaced characters.*/
 
 function algorithmA(userInput, correctAnswer) {
-  userInput = userInput.toLowerCase().split('');
-  correctAnswer = correctAnswer.toLowerCase().split('');
+  userInput = userInput.toUpperCase().split('');
+  correctAnswer = correctAnswer.toUpperCase().split('');
 
   let result = [];
 
   for (let i = 0; i < correctAnswer.length; i++) {
     if (userInput[i] === correctAnswer[i]) {
-      result.push(`${userInput[i]} / correct` + '\n');
+      result.push({ letter: userInput[i], result: 'correct' });
     } else if (correctAnswer.includes(userInput[i])) {
-      result.push(`${userInput[i]} / missplaced` + '\n');
-      let index = correctAnswer.indexOf(userInput[i]);
-      correctAnswer.splice(index, 1);
+      if (
+        userInput.filter((char) => char === userInput[i]).length >
+        correctAnswer.filter((char) => char === userInput[i]).length
+      ) {
+        result.push({ letter: userInput[i], result: 'incorrect' });
+      } else {
+        result.push({ letter: userInput[i], result: 'misplaced' });
+      }
     } else {
-      result.push(`${userInput[i]} / incorrect` + '\n');
+      result.push({ letter: userInput[i], result: 'incorrect' });
     }
   }
-  return result.join('');
+  return result;
 }
 
-let testrun = algorithmA('hallå', 'cykel');
+let testrun = algorithmA('TTTT', 'TEST');
 
 console.log(testrun);
 
 export default algorithmA;
+
+//ordetIdinLista.filter((char) => char === Alfabetet[i]).length > 1
