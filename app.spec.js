@@ -6,14 +6,11 @@ the code was already written and in some ways already dependant on other pieces 
 more difficult and I found myself "adjusting" my tests to fit the already written function, when in reality
 the function should be dictated by the test cases. */
 
-
-/* Ensures that the wordle function is properly implemented. 
-Without this, all other tests would be meaningless. */
+/* making sure that the function is imported and working properly */
 
 test('algorithmA function is defined and is a function', () => {
   expect(typeof algorithmA).toEqual('function');
 });
-
 
 // testing to see if the function returns the correct result when the user input is completely correct
 test('Correct letters are marked as correct', () => {
@@ -50,17 +47,28 @@ test('Misplaced letters are marked as misplaced', () => {
 
 //testing to see if the function returns the correct result when the user input is somewhat correct and also has
 //multiple instances of the same letter.
-test('Testing what happens if the same letter is found more instances than what the answer is', () => {
-    const result = algorithmA('TTTT', 'TEST');
-    expect(result).toEqual([
-      { letter: 'T', result: 'correct' },
-      { letter: 'T', result: 'incorrect' },
-      { letter: 'T', result: 'incorrect' },
-      { letter: 'T', result: 'correct' },
-    ]);
-  });
+test('same letter is found more instances than what the answer includes', () => {
+  const result = algorithmA('TTTT', 'TEST');
+  expect(result).toEqual([
+    { letter: 'T', result: 'correct' },
+    { letter: 'T', result: 'incorrect' },
+    { letter: 'T', result: 'incorrect' },
+    { letter: 'T', result: 'correct' },
+  ]);
+});
 
+//testing to see what happens if the user enters a number
+test('Number is marked as incorrect', () => {
+  const result = algorithmA('TTT1', 'TEST');
+  expect(result).toEqual([
+    { letter: 'T', result: 'correct' },
+    { letter: 'T', result: 'incorrect' },
+    { letter: 'T', result: 'incorrect' },
+    { letter: '1', result: 'incorrect' },
+  ]);
+});
 
+// testing to see what happens if user passes in an empty string
 test('Empty strings return an empty array', () => {
   const result = algorithmA('', '');
   expect(result).toEqual([]);
