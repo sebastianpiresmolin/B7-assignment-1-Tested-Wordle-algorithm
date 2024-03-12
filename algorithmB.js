@@ -1,45 +1,25 @@
 //ordetIdinLista.filter((char) => char === Alfabetet[i]).length > 1
 
-function algorithmB(length, hasDuplicates) {
-  const wordBank = [
-    'fantasy',
-    'student',
-    'language',
-    'lend',
-    'stereotype',
-    'producer',
-    'cope',
-    'labour',
-    'misplace',
-    'coma',
-    'guideline',
-    'shelter',
-    'video',
-    'passive',
-    'coincidence',
-    'railroad',
-    'dilute',
-    'circulate',
-    'bacon',
-    'prize',
-    'back',
-    'tycoon',
-    'humanity',
-    'redundancy',
-  ];
+function algorithmB(words, length, hasDuplicates) {
+  words = words.split(' ')
 
   let results = [];
-  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let characters = alphabet.split();
   let duplicates = hasDuplicates;
 
   function filterResults(currentValue, index) {
-    for (let j)
+    for (let j = 0; j < characters.length; j++) {
+      if (currentValue.split().filter((char) => char === characters[j]).length > 1) {
+        results.splice(index, 1);
+      }
+    }
   }
 
   if (length) {
-    for (let i = 0; i < wordBank.length; i++) {
-      if (wordBank[i].length === length) {
-        results.push(wordBank[i]);
+    for (let i = 0; i < words.length; i++) {
+      if (words[i].length === length) {
+        results.push(words[i]);
       }
     }
   }
@@ -50,7 +30,7 @@ function algorithmB(length, hasDuplicates) {
   return results;
 }
 
-let testrunB = algorithmB(7, false);
-console.log(testrunB);
+//let testrunB = algorithmB(7, false);
+//console.log(testrunB);
 
 export default algorithmB;
