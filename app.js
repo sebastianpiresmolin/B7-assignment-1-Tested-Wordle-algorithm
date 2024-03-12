@@ -7,6 +7,7 @@ function algorithmA(userInput, correctAnswer) {
   correctAnswer = correctAnswer.toUpperCase().split('');
 
   let result = [];
+  let duplicateCounter = 0;
 
   for (let i = 0; i < correctAnswer.length; i++) {
     if (userInput[i] === correctAnswer[i]) {
@@ -14,8 +15,9 @@ function algorithmA(userInput, correctAnswer) {
     } else if (correctAnswer.includes(userInput[i])) {
       if (
         userInput.filter((char) => char === userInput[i]).length >
-        correctAnswer.filter((char) => char === userInput[i]).length
+        correctAnswer.filter((char) => char === userInput[i]).length + duplicateCounter
       ) {
+        duplicateCounter++;
         result.push({ letter: userInput[i], result: 'incorrect' });
       } else {
         result.push({ letter: userInput[i], result: 'misplaced' });
@@ -27,7 +29,7 @@ function algorithmA(userInput, correctAnswer) {
   return result;
 }
 
-let testrun = algorithmA('TTTT', 'TEST');
+let testrun = algorithmA('sompss', 'kospis');
 
 console.log(testrun);
 
