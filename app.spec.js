@@ -63,7 +63,7 @@ test('Number is marked as incorrect', () => {
   expect(result).toEqual([
     { letter: 'T', result: 'correct' },
     { letter: 'T', result: 'incorrect' },
-    { letter: 'T', result: 'incorrect' },
+    { letter: 'T', result: 'misplaced' },
     { letter: '1', result: 'incorrect' },
   ]);
 });
