@@ -39,12 +39,8 @@ function algorithmA(userInput, correctAnswer) {
   return result;
 }
 
-let testrun = algorithmA('sompss', 'kospis');
+let testrunA = algorithmA('sompss', 'kospis');
 
-console.log(testrun);
-
-
-
-//ordetIdinLista.filter((char) => char === Alfabetet[i]).length > 1
+console.log(testrunA);
 
 export default algorithmA;

@@ -1,4 +1,4 @@
-import algorithmA from './app';
+import algorithmA from './algorithmA';
 
 /* I have challenged my self to write my tests before writing the actual code.
 This is because I realized that a big part of the challenge with writing the tests for the cinema project was that
